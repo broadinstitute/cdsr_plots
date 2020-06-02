@@ -1,0 +1,39 @@
+---
+title: "cdsrplots"
+output:
+  github_document:
+  html_notebook:
+    theme: united
+  html_document:
+    theme: united
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.width = 7, fig.height = 7, cache = T)
+
+library(tidyverse)
+library(useful)
+library(taigr)
+library(cdsrbiomarker)
+```
+
+cdsrplots is an R toolkit for ...
+
+## Install
+
+```{r, eval = FALSE}
+library(devtools)
+devtools::install_github("broadinstitute/cdsr_plots")
+```
+
+The package can then be loaded by calling
+
+```{r, eval=FALSE}
+library(cdsrplots)
+```
+
+## Ploting function
+
+
