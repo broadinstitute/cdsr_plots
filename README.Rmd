@@ -16,7 +16,6 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.width = 7, fig.heigh
 library(tidyverse)
 library(useful)
 library(taigr)
-library(cdsrbiomarker)
 ```
 
 cdsrplots is an R toolkit for ...
@@ -35,5 +34,10 @@ library(cdsrplots)
 ```
 
 ## Ploting function
+
+```{r}
+
+```
+
 
 
