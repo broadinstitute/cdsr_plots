@@ -54,6 +54,15 @@ make_gsea_dot <- function(data, enrich_var = NULL, size_var = NULL, p_var = "p_v
       stop("direction must be a column in data if dir is 'both'")
     }
   }
+  if(is.na(data$direction[[1]]) & dir != "both") {
+    data[["direction"]] <- dir
+  }
+  if(nrow(filter(data,direction == "pos")) == 0 & dir == "both") {
+    warning("Are you sure you want dir = 'both'? There are no positive terms in data")
+  }
+  if(nrow(filter(data,direction == "neg")) == 0 & dir == "both") {
+    warning("Are you sure you want dir = 'both'? There are no negative terms in data")
+  }
   #Process inputs
   transformed_p_var <- str_c("-log10(",p_var,")")
   data[transformed_p_var] <- -log10(data[[p_var]])
@@ -199,6 +208,15 @@ make_gsea_bar <- function(data, enrich_var = NULL, p_var = "p_value",dir = "both
     else {
       stop("direction must be a column in data if dir is 'both'")
     }
+  }
+  if(is.na(data$direction[[1]]) & dir != "both") {
+    data[["direction"]] <- dir
+  }
+  if(nrow(filter(data,direction == "pos")) == 0 & dir == "both") {
+    warning("Are you sure you want dir = 'both'? There are no positive terms in data")
+  }
+  if(nrow(filter(data,direction == "neg")) == 0 & dir == "both") {
+    warning("Are you sure you want dir = 'both'? There are no negative terms in data")
   }
   #Process inputs
   transformed_p_var <- str_c("-log10(",p_var,")")
