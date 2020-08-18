@@ -57,11 +57,8 @@ make_gsea_dot <- function(data, enrich_var = NULL, size_var = NULL, p_var = "p_v
   if(is.na(data$direction[[1]]) & dir != "both") {
     data[["direction"]] <- dir
   }
-  if(nrow(filter(data,direction == "pos")) == 0 & dir == "both") {
-    warning("Are you sure you want dir = 'both'? There are no positive terms in data")
-  }
-  if(nrow(filter(data,direction == "neg")) == 0 & dir == "both") {
-    warning("Are you sure you want dir = 'both'? There are no negative terms in data")
+  if(data$direction %>% unique() %>% length() != 2 & dir == "both") {
+    stop("there is only one direction in data. Set dir to 'pos' or 'neg'")
   }
   #Process inputs
   transformed_p_var <- str_c("-log10(",p_var,")")
@@ -212,11 +209,8 @@ make_gsea_bar <- function(data, enrich_var = NULL, p_var = "p_value",dir = "both
   if(is.na(data$direction[[1]]) & dir != "both") {
     data[["direction"]] <- dir
   }
-  if(nrow(filter(data,direction == "pos")) == 0 & dir == "both") {
-    warning("Are you sure you want dir = 'both'? There are no positive terms in data")
-  }
-  if(nrow(filter(data,direction == "neg")) == 0 & dir == "both") {
-    warning("Are you sure you want dir = 'both'? There are no negative terms in data")
+  if(data$direction %>% unique() %>% length() != 2 & dir == "both") {
+    stop("there is only one direction in data. Set dir to 'pos' or 'neg'")
   }
   #Process inputs
   transformed_p_var <- str_c("-log10(",p_var,")")
@@ -256,9 +250,9 @@ make_gsea_bar <- function(data, enrich_var = NULL, p_var = "p_value",dir = "both
       ggplot(aes_string(x = x_var,y = "term",fill = color_var)) +
       geom_col() +  ylab("") + lims(x = c(0,ifelse(data[[1,x_var]] < 0,-max_x,max_x)))
     if (color_var == "direction") {
-      p <- p + scale_colour_manual(values = c("pos" = "red", "neg" = "blue")) + guides(fill = F)
+      p <- p + scale_fill_manual(values = c("pos" = "red", "neg" = "blue")) + guides(fill = F)
     } else {
-      p <- p + scale_color_gradient(low = "blue", high = "red",limits = c(0,max(data[[color_var]])))
+      p <- p + scale_fill_gradient(low = "blue", high = "red",limits = c(0,max(data[[color_var]])))
     }
     p <- p + theme
     #Both
