@@ -2,13 +2,11 @@
 #'
 #' @param base_size
 #' @param base_family
+#' @param base_face
+#' @param legend_bottom
 #'
-#' @return
-#' @export
-#'
-#' @examples
-#' https://rpubs.com/Koundy/71792
-theme_Publication <- function(base_size=12, base_family="Helvetica", base_face = 'bold', legend_bottom = TRUE) {
+#' @export theme_publication
+theme_publication <- function(base_size=12, base_family="Helvetica", base_face = 'bold', legend_bottom = TRUE) {
   library(grid)
   library(ggthemes)
   library(ggplot2)
@@ -45,31 +43,21 @@ theme_Publication <- function(base_size=12, base_family="Helvetica", base_face =
             strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
             strip.text = element_text(face=base_face)
     ))
-  
+
 }
 
 #' Set publication fill scheme
 #'
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
-scale_fill_Publication <- function(...){
+#'@export scale_fill_publication
+scale_fill_publication <- function(){
   library(scales)
   discrete_scale("fill","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
 }
 
 #' Set publication color scheme
 #'
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
-scale_color_Publication <- function(...){
+#'@export scale_color_publication
+scale_color_publication <- function(){
   library(scales)
   discrete_scale("colour","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
 }

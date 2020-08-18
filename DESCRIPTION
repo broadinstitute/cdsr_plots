@@ -1,12 +1,18 @@
 Package: cdsrplots
 Type: Package
-Title: What the Package Does (Title Case)
+Title: CDS plotting functions 
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author@R: c(
+  person("William", "Colgan", email = "wcolgan@broadinstitute.org", role = "cre"),
+  person("Allie", "Warren", email = "awarren@broadinstitute.org", role = "cre"))
+Description: cdsrplots contains functions for generating standard CDS plots such as the volcano plot.
+License: MIT
 Encoding: UTF-8
 LazyData: true
+Imports:
+  tidyverse,
+  scales,
+  ggthemes,
+  grid,
+  cowplot
 RoxygenNote: 7.1.1
