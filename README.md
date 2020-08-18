@@ -148,11 +148,11 @@ The `make_gsea_dot` and `make_gsea_bar` functions are a quick and easy
 way to visualize the results of a gene set enrichment analysis. The
 functions are designed to work with the
 [cdsrgsea](https://github.com/broadinstitute/cdsr_gsea) package but they
-are fexible enough to work with other packages.
+are fexible enough to work with other GSEA packages.
 
 ### Example data
 
-As an example we will look for enriched terms from the HALLMARK
+As an example we will look for enriched gene sets from the HALLMARK
 collection using the hypergeometric
 test.
 
@@ -175,7 +175,7 @@ nutlin_gsea %>% head()
     ## 5 HALLMARK_AP… 3.33e- 5 8.32e- 4       6.70 pos         161            9 <chr […
     ## 6 HALLMARK_TN… 1.81e- 4 3.02e- 3       5.28 pos         200            9 <chr […
 
-### Base plots
+### Base plot
 
 Make a simple bar plot by providing the data frame returned by
 `cdsrgsea`.
@@ -186,14 +186,6 @@ cdsrplots::make_gsea_bar(nutlin_gsea)
 
 ![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
-Or a dot plot that shows the overlap size.
-
-``` r
-cdsrplots::make_gsea_dot(nutlin_gsea)
-```
-
-![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
-
 The default variable names match the variable names returned by
 `cdsrgsea`.
 
@@ -203,13 +195,25 @@ The default variable names match the variable names returned by
   - `size_var` specifies the column containing the sizes. By default
     `size_var` = ‘overlap\_size’ for hypergeometric and ‘size’ for GSEA.
   - `p_var` specifies the column contianing the significance values. By
-    default `size_var` = ‘p\_value’
+    default `p_var` = ‘p\_value’
 
-But the variable names can be changed. For example we may want to use
-the adjusted p-value.
+Variable names can changed to work with other GSEA packages or to
+customize the plots. For example we can set`p_var` to ‘p\_adjust’
+instead of ‘p\_value’.
 
 ``` r
 cdsrplots::make_gsea_dot(nutlin_gsea,p_var = 'p_adjust')
+```
+
+![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+
+### Single direction
+
+The direction parameter `dir` can be set to ‘pos’ to only shown positive
+terms or ‘neg’ to only show negative terms
+
+``` r
+cdsrplots::make_gsea_dot(nutlin_gsea,dir = "pos")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
@@ -220,8 +224,8 @@ The `color_by` argument sets how the plot is colored. There are three
 options
 
   - ‘pval’ - colors by significance
-  - ‘dir’ - colors by the direction of the enriched term
-  - ‘enrich’ - colors by the enrichment value
+  - ‘dir’ - colors by the direction of the enrichment
+  - ‘enrich’ - colors by enrichment
 
 <!-- end list -->
 
@@ -237,12 +241,13 @@ The `x_by` argument sets which variable is plotted on the x-axis. There
 are two options
 
   - ‘pval’ - the significance is plotted on the x-axis
-  - ‘enrich’ - the enrichment value is plotted on the x-axis
+  - ‘enrich’ - the enrichment is plotted on the
+x-axis
 
 <!-- end list -->
 
 ``` r
-cdsrplots::make_gsea_bar(nutlin_gsea, color_by = "dir", x_by = "pval")
+cdsrplots::make_gsea_bar(nutlin_gsea, color_by = "enrich", x_by = "pval")
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
@@ -252,19 +257,12 @@ cdsrplots::make_gsea_bar(nutlin_gsea, color_by = "dir", x_by = "pval")
 There are a number of parameters that modify the y-axis
 
   - `n_shown` sets the number of terms which are shown.
-  - `sig_only` determines whether only significant terms are
-shown.
+  - `sig_only` determines whether only significant terms are shown.
 
 <!-- end list -->
 
 ``` r
-cdsrplots::make_gsea_dot(nutlin_gsea,n_shown = 15, remove_collection_name = T)
+cdsrplots::make_gsea_dot(nutlin_gsea,sig_only = T)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
-
-``` r
-cdsrplots::make_gsea_bar(nutlin_gsea,sig_only = T)
-```
-
-![](README_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
