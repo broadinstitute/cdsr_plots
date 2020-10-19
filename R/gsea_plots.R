@@ -57,7 +57,7 @@ make_gsea_dot <- function(data, enrich_var = NULL, size_var = NULL, p_var = "p_v
   if(is.na(data$direction[[1]]) & dir != "both") {
     data[["direction"]] <- dir
   }
-  if(data$direction %>% unique() %>% length() %>% setdiff(c(NA)) != 2 & dir == "both") {
+  if(data$direction %>% unique() %>% setdiff(c(NA)) %>% length() != 2 & dir == "both") {
     stop("there is only one direction in data. Set dir to 'pos' or 'neg'")
   }
   #Process inputs
@@ -209,7 +209,7 @@ make_gsea_bar <- function(data, enrich_var = NULL, p_var = "p_value",dir = "both
   if(is.na(data$direction[[1]]) & dir != "both") {
     data[["direction"]] <- dir
   }
-  if(data$direction %>% unique() %>% length() %>% setdiff(c(NA)) != 2 & dir == "both") {
+  if(data$direction %>% unique() %>% setdiff(c(NA)) %>% length()  != 2 & dir == "both") {
     stop("there is only one direction in data. Set dir to 'pos' or 'neg'")
   }
   #Process inputs
