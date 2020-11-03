@@ -63,7 +63,7 @@ make_gsea_dot <- function(data, enrich_var = NULL, size_var = NULL, p_var = "p_v
   #Process inputs
   transformed_p_var <- str_c("-log10(",p_var,")")
   data[transformed_p_var] <- -log10(data[[p_var]])
-  data <- data %>% arrange(-!!as.symbol(transformed_p_var))
+  data <- data %>% dplyr::arrange(-!!as.symbol(transformed_p_var))
   if(color_by == "pval") {color_var <- transformed_p_var}
   else if(color_by == "dir") {color_var <- "direction"}
   else {
@@ -215,7 +215,7 @@ make_gsea_bar <- function(data, enrich_var = NULL, p_var = "p_value",dir = "both
   #Process inputs
   transformed_p_var <- str_c("-log10(",p_var,")")
   data[transformed_p_var] <- -log10(data[[p_var]])
-  data <- data %>% arrange(-!!as.symbol(transformed_p_var))
+  data <- data %>% dplyr::arrange(-!!as.symbol(transformed_p_var))
   if(color_by == "pval") {color_var <- transformed_p_var}
   else if(color_by == "dir") {color_var <- "direction"}
   else {
